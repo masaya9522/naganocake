@@ -1,0 +1,68 @@
+<div class="container">
+  <h5 class="mx-5 my-3">注文履歴詳細</h5>
+  <div class="row mb-3">
+    <table class="table table-borderless">
+      <tr>
+        <th>購入者</th>
+        <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+      </tr>
+      <tr>
+        <th>注文日</th>
+        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+      <tr>
+        <th>配送先</th>
+        <td>〒<%= @order.postal_code %><%= @order.address %>
+              <%= @order.name %>
+        </td>
+      </tr>
+      <tr>
+        <th>支払方法</th>
+        <td><%= @order.payment_method_i18n %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="row mx-auto">
+    <div class="col-lg-7">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% total = 0 %>
+          <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= order_item.tax_price %></td>
+            <td><%= order_item.amount %></td>
+            <td><%= order_item.sum_price %></td>
+          </tr>
+          <% total += order_item.sum_price %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-3 ml-2">
+      <table class="table table-borderless">
+        <tr>
+          <th>商品合計</th>
+          <td><%= total %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td>800</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= total + 800 %></td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>

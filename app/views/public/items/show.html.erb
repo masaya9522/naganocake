@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row mt-5 d-flex justify-content-center">
+    <div class="col-lg-5">
+      <%= image_tag @item.get_item_image(300, 300) %>
+    </div>
+    <div class="col-lg-3">
+      <div class="mb-2"><strong><%= @item.name %></strong></div>
+      <div class="mb-5"><%= @item.introduction %></div>
+      <div class="mb-3"><strong>￥<%= @item.with_tax_price %></strong>(税込)</div>
+      <div>
+        <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <p>数量を選択して下さい。</p>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.select  :amount, *[1..10] %>
+        <%= f.submit "カートに追加" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

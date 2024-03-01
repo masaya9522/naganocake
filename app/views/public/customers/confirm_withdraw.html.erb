@@ -1,0 +1,8 @@
+<h1>本当に退会しますか？</h1>
+
+<p>退会すると、会員登録情報や</p>
+<p>これまでの購入履歴が観覧できなくなります。</p>
+<P>退会する場合は、「退会する」をクリックしてください。</P>
+
+<%= link_to "退会しない", my_page_path, :class => "mb-2 mx-auto btn btn-primary w-50" %>
+<%= link_to "退会する", customer_withdraw_path, method: :patch, :class => "mx-auto btn btn-danger w-50", data: {confirm: "本当に退会しますか？"} %>

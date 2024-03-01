@@ -1,0 +1,20 @@
+<div class="container">
+  <h5 class="p-3">注文情報入力</h5>
+  <%= form_with model: @order, url: confirm_order_path, method: :post do |f| %>
+    <h5><strong>支払方法</strong></h5>
+      <div class="px-5">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+      </div>
+      <div class="px-5">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
+      </div>
+    <h5><strong>お届け先</strong></h5>
+      <div class="px-5">
+        <%= current_customer.postal_code%> <%= current_customer.address%><br>
+        <%= current_customer.first_name%> <%= current_customer.last_name%>
+      </div>
+      <%= f.submit "確認画面へ進む", class: "mx-auto"%>
+  <% end %>
+</div>
